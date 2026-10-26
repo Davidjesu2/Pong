@@ -12,8 +12,6 @@ internal class InputHelper
         get { return new Vector2(currentMouseState.X, currentMouseState.Y); }
     }
 
-
-
     public void Update()
     {
         previousMouseState = currentMouseState;

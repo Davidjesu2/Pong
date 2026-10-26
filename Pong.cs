@@ -7,46 +7,34 @@ public class Pong : Game
 {
     private GraphicsDeviceManager _graphics;
     private SpriteBatch _spriteBatch;
-
-    private Texture2D player1;
-
-    private Vector2 position;
-
-    private InputHelper inputHelper;
+    private GameWorld gameWorld;
 
     public Pong()
     {
         _graphics = new GraphicsDeviceManager(this);
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
-        position = Vector2.Zero;
-        inputHelper = new InputHelper();
-
-        
     }
 
     protected override void LoadContent()
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
-        player1 = Content.Load<Texture2D>("player");
-        _graphics.PreferredBackBufferHeight = 800;
+
+
+
+        // Setear el Size de la ventana del juego  1000x800
         _graphics.PreferredBackBufferWidth = 1000;
+        _graphics.PreferredBackBufferHeight = 800;
         _graphics.ApplyChanges();
-    
+
+
+        gameWorld = new GameWorld(Content);
+
     }
 
     protected override void Update(GameTime gameTime)
     {
-        inputHelper.Update();
-
-        if (inputHelper.KeyPressed(Keys.S) && (position.Y < 600) && !inputHelper.KeyPressed(Keys.W))
-        {
-            position.Y += 10;
-        }
-        else if (inputHelper.KeyPressed(Keys.W) && (position.Y > 0) && !inputHelper.KeyPressed(Keys.S))
-        {
-            position.Y -= 10;
-        }
+        gameWorld.Update(gameTime);
 
 
         base.Update(gameTime);
@@ -55,11 +43,7 @@ public class Pong : Game
     protected override void Draw(GameTime gameTime)
     {
         GraphicsDevice.Clear(Color.Black);
-        _spriteBatch.Begin();
-        _spriteBatch.Draw(player1, position, Color.White);
-        _spriteBatch.End();
-
-
+        gameWorld.Draw(gameTime, _spriteBatch);
 
 
         base.Draw(gameTime);
