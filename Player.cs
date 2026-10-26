@@ -2,7 +2,6 @@
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using System.Net.Mime;
 
 internal class Player
 {
@@ -18,6 +17,12 @@ internal class Player
     
 
 
+
+    /// <summary>
+    /// Inicializa un Player
+    /// </summary>
+    /// <param name="content"></param>
+    /// <param name="playerID">Identificador del jugador 1 o 2</param>
     public Player(ContentManager content, int playerID)
     {
         PlayerID = playerID;
@@ -38,11 +43,31 @@ internal class Player
     }
 
 
+
+    /// <summary>
+    /// Actualiza el estado del jugador en cada Frame
+    /// </summary>
+    /// <param name="gameTime"></param>
     public void Update(GameTime gameTime)
+    {
+        HandleInput();
+    }
+
+    public void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
+    {
+        _spriteBatch.Draw(playerSprite, Position, Color.White);
+    }
+
+
+
+    /// <summary>
+    /// Maneja el Input del jugador
+    /// </summary>
+    private void HandleInput()
     {
         inputHelper.Update();
 
-        if(PlayerID == 1)
+        if (PlayerID == 1)
         {
             if (inputHelper.KeyPressed(Keys.S) && (Position.Y < 600) && !inputHelper.KeyPressed(Keys.W))
             {
@@ -64,15 +89,7 @@ internal class Player
                 Position -= Velocity;
             }
         }
-
     }
-
-    public void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
-    {
-        _spriteBatch.Draw(playerSprite, Position, Color.White);
-    }
-
-
 
 }
 
