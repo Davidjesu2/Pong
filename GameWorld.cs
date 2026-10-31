@@ -1,13 +1,15 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using static System.Net.Mime.MediaTypeNames;
 
 public class GameWorld
 {
     Player player1, player2;
     Ball ball;
+    SpriteFont scoreFont;
+    Texture2D line;
 
-    SpriteFont score;
     Rectangle left, right, top, bot;
 
     internal GameWorld(ContentManager content)
@@ -19,6 +21,9 @@ public class GameWorld
         bot = new Rectangle(0, 800, 1000, 0);
         left = new Rectangle(-100, 0, 0, 800);
         right = new Rectangle(1100, 0, 0, 800);
+
+        scoreFont = content.Load<SpriteFont>("File");
+        line = content.Load<Texture2D>("Line");
     }
 
     public void Update(GameTime gameTime)
@@ -55,11 +60,13 @@ public class GameWorld
         if (ball.BoundingBox.Intersects(left))
         {
             ball.Reset();
+            player2.Score += 1;
         }
 
         if (ball.BoundingBox.Intersects(right))
         {
             ball.Reset();
+            player1.Score += 1;
         }
 
 
@@ -68,6 +75,21 @@ public class GameWorld
     public void Draw(GameTime gameTime, SpriteBatch _spriteBatch)
     {
         _spriteBatch.Begin();
+        _spriteBatch.Draw(
+    texture: line,
+    position: new Vector2(500, 0),
+    sourceRectangle: null,
+    color: Color.White,
+    rotation: 0,
+    origin: new Vector2(line.Width / 2, 0), // <--- Aquí defines el pivote
+    scale: 1.0f,
+    effects: SpriteEffects.None,
+    layerDepth: 0f
+);
+        Vector2 FontOriginOne = scoreFont.MeasureString(player1.Score.ToString()) / 2;
+        Vector2 FontOriginTwo = scoreFont.MeasureString(player2.Score.ToString()) / 2;
+        _spriteBatch.DrawString(scoreFont, player1.Score.ToString(), new Vector2(250, 200), Color.White, 0, FontOriginOne, 1.0f, SpriteEffects.None, 0.5f);
+        _spriteBatch.DrawString(scoreFont, player2.Score.ToString(), new Vector2(750, 200), Color.White, 0, FontOriginTwo, 1.0f, SpriteEffects.None, 0.5f);
         player1.Draw(gameTime, _spriteBatch);
         player2.Draw(gameTime, _spriteBatch);
         ball.Draw(gameTime, _spriteBatch);

@@ -11,6 +11,8 @@ internal class Player
 
     public int PlayerID { get; private set; }
 
+    public int Score { get;  set; }
+
     Ball ball;
 
     public Vector2 Position { get; private set; }
