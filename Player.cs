@@ -11,11 +11,21 @@ internal class Player
 
     public int PlayerID { get; private set; }
 
+    Ball ball;
+
     public Vector2 Position { get; private set; }
 
     public Vector2 Velocity { get; private set; }
-    
 
+    public Rectangle BoundingBox
+    {
+        get
+        {
+            Rectangle spriteBounds = playerSprite.Bounds;
+            spriteBounds.Offset(Position);
+            return spriteBounds;
+        }
+    }
 
 
     /// <summary>
@@ -23,10 +33,10 @@ internal class Player
     /// </summary>
     /// <param name="content"></param>
     /// <param name="playerID">Identificador del jugador 1 o 2</param>
-    public Player(ContentManager content, int playerID)
+    public Player(ContentManager content, int playerID, Ball ball)
     {
         PlayerID = playerID;
-
+        this.ball = ball;
 
         if(playerID == 1)
         {
