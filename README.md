@@ -3,11 +3,11 @@ Este es el primer juego que estoy desarrollando para aprender a crear videojuego
 
 # Metas
 - [ ] Menú, boton de reinicio, contador
-- [ ] Modo 2 Jugadores 
+- [X] Modo 2 Jugadores 
 - [ ] Modo 1 Jugador + 1 IA
 - [ ] Sonidos (Pelota rebota, Pelota sale de la ventana, música de fondo)
-- [ ] Pelota que rebota con los jugadores y las paredes
-- [ ] Detectar cuando la pelota pasa de la ventana y entregar puntaje al contador del Jugador1 o Jugador2
+- [X] Pelota que rebota con los jugadores y las paredes
+- [X] Detectar cuando la pelota pasa de la ventana y entregar puntaje al contador del Jugador1 o Jugador2
 
 
 
