@@ -27,4 +27,5 @@ Este es el primer juego que estoy desarrollando para aprender a crear videojuego
 - Colisiones entre Rectangulos, es decir se superponen (Rectangle.Intersects(Rectangle))
 - Reproducir Sonidos (SoundEffect, SoundEffect.Play(float volumen, float pitch, float pan)
 - Reproducir Canciones (MediaPlayer, Song, MediaPlayer.Volume = float, MediaPlayer.IsRepeating = bool, MediaPlayer.Play(Song))
+- Uso de gameTime.ElapsedGameTime.TotalSeconds para manejar el juego mediante DeltaTime y volverlo independiente de las veces que se actualiza el bucle del Juego (pasar de pixeles por frame a pixeles por segundo)
 

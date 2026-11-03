@@ -36,7 +36,6 @@ internal class Ball
     /// </summary>
     public void Bounce()
     {
-        Position = new Vector2(Position.X - Velocity.X, Position.Y);
         Velocity = new Vector2((Velocity.X)*-1, Velocity.Y);
     }
 
@@ -45,7 +44,6 @@ internal class Ball
     /// </summary>
     public void VerticalBounce()
     {
-        Position = new Vector2(Position.X, Position.Y - Velocity.Y);
         Velocity = new Vector2(Velocity.X, Velocity.Y * -1);
     }
 
@@ -60,15 +58,16 @@ internal class Ball
 
         int x = Random.Shared.Next(0, 2) == 0 ? 1 : -1;
         int y = Random.Shared.Next(0, 2) == 0 ? 1 : -1;
-        Velocity = new Vector2(10 * x, 4 * y);
+        Velocity = new Vector2(600 * x, 100 * y);
     }
 
     /// <summary>
     /// Este método actualiza la posición de la pelota
     /// </summary>
-    private void BallUpdatePosition()
+    private void BallUpdatePosition(GameTime gameTime)
     {
-        Position += Velocity;
+        float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+        Position += Velocity * deltaTime;
     }
 
     // SONIDO
@@ -91,7 +90,7 @@ internal class Ball
     {
         ballSprite = content.Load<Texture2D>("Ball");
         Position = new Vector2(500, 400);
-        Velocity = new Vector2(10, 4);
+        Velocity = new Vector2(600, 100);
         boingSound = content.Load<SoundEffect>("Boing");
     }
     
@@ -102,7 +101,7 @@ internal class Ball
     /// <param name="gameTime"></param>
     public void Update(GameTime gameTime)
     {
-        BallUpdatePosition();
+        BallUpdatePosition(gameTime);
     }
 
 
