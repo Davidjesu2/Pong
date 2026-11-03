@@ -3,9 +3,10 @@ using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Media;
-
+using Microsoft.Xna.Framework.Input;
 internal class GameWorld
 {
+    InputHelper inputHelper;
     Player player1, player2;
     Ball ball;
     SpriteFont scoreFont;
@@ -16,6 +17,16 @@ internal class GameWorld
     Song backgroundSong; 
 
     Rectangle left, right, top, bot;
+
+    /// <summary>
+    /// Reinicia el juego a su estado por defecto
+    /// </summary>
+    private void ResetGame()
+    {
+        player1.Reset();
+        player2.Reset();
+        ball.Reset();
+    }
 
     /// <summary>
     /// Comprueba si ocurrio una colision de la pelota en el juego y actua dependiendo de la colision que ocurrio
@@ -86,6 +97,7 @@ internal class GameWorld
         ball = new Ball(content);
         player1 = new Player(content, 1);
         player2 = new Player(content, 2);
+        inputHelper = new InputHelper();
 
         // Rectangulos para las colisiones
 
@@ -112,10 +124,16 @@ internal class GameWorld
         player1.Update(gameTime);
         player2.Update(gameTime);
         ball.Update(gameTime);
+        inputHelper.Update();
+
 
         // Comprobar si ocurrio una colision entre la pelota y reproducir sonido
         BallCollision(ball, player1, player2);
 
+        if (inputHelper.KeyPressed(Keys.Space))
+        {
+            ResetGame();
+        }
 
 
     }

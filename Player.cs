@@ -25,6 +25,22 @@ internal class Player
         }
     }
 
+
+    public void Reset()
+    {
+        if (PlayerID == 1)
+        {
+            Position = new Vector2(0, 400);
+        }
+        else if (PlayerID == 2)
+        {
+            Position = new Vector2(950, 400);
+        }
+        Velocity = new Vector2(0, 600);
+
+        Score = 0;
+    }
+
     /// <summary>
     /// Maneja el Input del jugador
     /// </summary>
