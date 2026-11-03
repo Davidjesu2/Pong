@@ -1,6 +1,8 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Audio;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Media;
 using static System.Net.Mime.MediaTypeNames;
 
 public class GameWorld
@@ -10,13 +12,17 @@ public class GameWorld
     SpriteFont scoreFont;
     Texture2D line;
 
+    SoundEffect goalSound;
+
+    Song backgroundSong; 
+
     Rectangle left, right, top, bot;
 
     internal GameWorld(ContentManager content)
     {
         ball = new Ball(content);
-        player1 = new Player(content, 1, ball);
-        player2 = new Player(content, 2, ball);
+        player1 = new Player(content, 1);
+        player2 = new Player(content, 2);
         top = new Rectangle(0, 0, 1000, 0);
         bot = new Rectangle(0, 800, 1000, 0);
         left = new Rectangle(-100, 0, 0, 800);
@@ -24,6 +30,12 @@ public class GameWorld
 
         scoreFont = content.Load<SpriteFont>("File");
         line = content.Load<Texture2D>("Line");
+        goalSound = content.Load<SoundEffect>("Goal");
+        backgroundSong = content.Load<Song>("Sound");
+
+        MediaPlayer.Volume = 0.1f;
+        MediaPlayer.IsRepeating = true;
+        MediaPlayer.Play(backgroundSong);
     }
 
     public void Update(GameTime gameTime)
@@ -59,12 +71,14 @@ public class GameWorld
 
         if (ball.BoundingBox.Intersects(left))
         {
+            GoalSound();
             ball.Reset();
             player2.Score += 1;
         }
 
         if (ball.BoundingBox.Intersects(right))
         {
+            GoalSound();
             ball.Reset();
             player1.Score += 1;
         }
@@ -81,7 +95,7 @@ public class GameWorld
     sourceRectangle: null,
     color: Color.White,
     rotation: 0,
-    origin: new Vector2(line.Width / 2, 0), // <--- Aquí defines el pivote
+    origin: new Vector2(line.Width / 2, 0),
     scale: 1.0f,
     effects: SpriteEffects.None,
     layerDepth: 0f
@@ -96,7 +110,10 @@ public class GameWorld
         _spriteBatch.End();
     }
 
-
+    private void GoalSound()
+    {
+        goalSound.Play(0.2f, 0f, 0f);
+    }
 
 }
 

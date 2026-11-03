@@ -26,6 +26,13 @@
 /processorParam:Version=3.8.5.1
 /build:Ball.png
 
+#begin Boing.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Boing.mp3
+
 #begin File.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
@@ -33,6 +40,13 @@
 /processorParam:TextureFormat=Compressed
 /processorParam:Version=3.8.5.1
 /build:File.spritefont
+
+#begin Goal.mp3
+/importer:Mp3Importer
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Goal.mp3
 
 #begin Line.png
 /importer:TextureImporter
@@ -59,4 +73,11 @@
 /processorParam:TextureFormat=Color
 /processorParam:Version=3.8.5.1
 /build:Player.png
+
+#begin Sound.mp3
+/importer:Mp3Importer
+/processor:SongProcessor
+/processorParam:Quality=Best
+/processorParam:Version=3.8.5.1
+/build:Sound.mp3
 

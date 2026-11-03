@@ -5,15 +5,15 @@ using Microsoft.Xna.Framework.Input;
 
 internal class Player
 {
+    // Miembros Variable
     private Texture2D playerSprite;
 
     private InputHelper inputHelper;
 
+    // Propiedades 
     public int PlayerID { get; private set; }
 
     public int Score { get;  set; }
-
-    Ball ball;
 
     public Vector2 Position { get; private set; }
 
@@ -35,10 +35,9 @@ internal class Player
     /// </summary>
     /// <param name="content"></param>
     /// <param name="playerID">Identificador del jugador 1 o 2</param>
-    public Player(ContentManager content, int playerID, Ball ball)
+    public Player(ContentManager content, int playerID)
     {
         PlayerID = playerID;
-        this.ball = ball;
 
         if(playerID == 1)
         {
