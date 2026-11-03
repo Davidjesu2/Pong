@@ -20,23 +20,17 @@ public class Pong : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-
-
         // Setear el Size de la ventana del juego  1000x800
         _graphics.PreferredBackBufferWidth = 1000;
         _graphics.PreferredBackBufferHeight = 800;
         _graphics.ApplyChanges();
 
-
         gameWorld = new GameWorld(Content);
-
     }
 
     protected override void Update(GameTime gameTime)
     {
         gameWorld.Update(gameTime);
-
-
         base.Update(gameTime);
     }
 
@@ -44,8 +38,6 @@ public class Pong : Game
     {
         GraphicsDevice.Clear(Color.Black);
         gameWorld.Draw(gameTime, _spriteBatch);
-
-
         base.Draw(gameTime);
     }
 }

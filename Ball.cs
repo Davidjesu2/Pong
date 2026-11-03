@@ -1,31 +1,20 @@
-﻿
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
-using System;
 using Microsoft.Xna.Framework.Audio;
+using System;
+
 
 internal class Ball
 {
-    // Miembro Variables
     Texture2D ballSprite;
-
     SoundEffect boingSound;
-    
-    // Propiedades
 
-    /// <summary>
-    /// Esta propiedad representa la posición de la pelota
-    /// </summary>
     public Vector2 Position { get; private set; }
-
-    /// <summary>
-    /// Esta propiedad representa la velocidad de la pelota en X e Y
-    /// </summary>
     public Vector2 Velocity { get; private set; }
 
     /// <summary>
-    /// Esta propiedad devuelve el rectangulo del sprite de la pelota
+    /// Esta propiedad devuelve un rectangulo con el tamaño del sprite
     /// </summary>
     public Rectangle BoundingBox
     {
@@ -38,6 +27,10 @@ internal class Ball
     }
 
 
+    // Métodos para el comportamiento de la pelota
+    // ----------------------------------------------------------------------------------
+
+    // REBOTES
     /// <summary>
     /// Este método maneja los rebotes de la pelota con los jugadores
     /// </summary>
@@ -45,7 +38,6 @@ internal class Ball
     {
         Position = new Vector2(Position.X - Velocity.X, Position.Y);
         Velocity = new Vector2((Velocity.X)*-1, Velocity.Y);
-        BoingSound();
     }
 
     /// <summary>
@@ -55,51 +47,9 @@ internal class Ball
     {
         Position = new Vector2(Position.X, Position.Y - Velocity.Y);
         Velocity = new Vector2(Velocity.X, Velocity.Y * -1);
-        BoingSound();
     }
 
-
-
-    /// <summary>
-    /// Este método actualiza la posición de la pelota
-    /// </summary>
-    private void BallUpdatePosition()
-    {
-        Position += Velocity;
-    }
-
-    /// <summary>
-    /// Inicializa una pelota
-    /// </summary>
-    /// <param name="content"></param>
-    public Ball(ContentManager content)
-    {
-        ballSprite = content.Load<Texture2D>("Ball");
-        Position = new Vector2(500, 400);
-        Velocity = new Vector2(10, 4);
-        boingSound = content.Load<SoundEffect>("Boing");
-    }
-
-    /// <summary>
-    /// Este método maneja el estado actual de la pelota
-    /// </summary>
-    /// <param name="gameTime"></param>
-    public void Update(GameTime gameTime)
-    {
-        BallUpdatePosition();
-    }
-
-
-    /// <summary>
-    /// Este método dibuja la pelota
-    /// </summary>
-    /// <param name="gametime"></param>
-    /// <param name="_spriteBatch"></param>
-    public void Draw(GameTime gametime, SpriteBatch _spriteBatch)
-    {
-        _spriteBatch.Draw(ballSprite, Position, Color.White);
-    }
-
+    // POSICION
 
     /// <summary>
     /// Este método reinicia la pelota en el centro y con una direccion en diagonal aleatoria
@@ -114,15 +64,57 @@ internal class Ball
     }
 
     /// <summary>
+    /// Este método actualiza la posición de la pelota
+    /// </summary>
+    private void BallUpdatePosition()
+    {
+        Position += Velocity;
+    }
+
+    // SONIDO
+    /// <summary>
     /// Reproduce el sonido de rebote de la pelota
     /// </summary>
-    private void BoingSound()
+    public void PlayBoingSound()
     {
         boingSound.Play(0.8f, 2.5f, 0.0f);
+    }
+    // ----------------------------------------------------------------------------------
+
+
+    // Constructor 
+    /// <summary>
+    /// Inicializa una pelota
+    /// </summary>
+    /// <param name="content"></param>
+    public Ball(ContentManager content)
+    {
+        ballSprite = content.Load<Texture2D>("Ball");
+        Position = new Vector2(500, 400);
+        Velocity = new Vector2(10, 4);
+        boingSound = content.Load<SoundEffect>("Boing");
+    }
+    
+
+    /// <summary>
+    /// Este método maneja el estado actual de la pelota
+    /// </summary>
+    /// <param name="gameTime"></param>
+    public void Update(GameTime gameTime)
+    {
+        BallUpdatePosition();
     }
 
 
 
-
+    /// <summary>
+    /// Este método dibuja la pelota
+    /// </summary>
+    /// <param name="gametime"></param>
+    /// <param name="_spriteBatch"></param>
+    public void Draw(GameTime gametime, SpriteBatch _spriteBatch)
+    {
+        _spriteBatch.Draw(ballSprite, Position, Color.White);
+    }
 }
 
