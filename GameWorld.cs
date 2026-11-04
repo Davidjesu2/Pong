@@ -39,13 +39,13 @@ internal class GameWorld
         // Comprobar colisiones con jugadores y reproducir sonido
         if (ball.BoundingBox.Intersects(player1.BoundingBox))
         {
-            ball.Bounce();
+            ball.Bounce(player1.BoundingBox);
             ball.PlayBoingSound();
         }
 
         else if (ball.BoundingBox.Intersects(player2.BoundingBox))
         {
-            ball.Bounce();
+            ball.Bounce(player2.BoundingBox);
             ball.PlayBoingSound();
         }
 

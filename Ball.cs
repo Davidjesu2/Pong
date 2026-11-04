@@ -34,9 +34,36 @@ internal class Ball
     /// <summary>
     /// Este método maneja los rebotes de la pelota con los jugadores
     /// </summary>
-    public void Bounce()
+    public void Bounce(Rectangle paddleBounds)
     {
-        Velocity = new Vector2((Velocity.X)*-1, Velocity.Y);
+        bool esPaletaIzquierda = paddleBounds.X < Position.X;
+
+        if (esPaletaIzquierda && Velocity.X > 0) return;
+        if (!esPaletaIzquierda && Velocity.X < 0) return;
+
+        float newX = -Velocity.X;
+        float ballCenter = Position.Y + (ballSprite.Height / 2f);
+        float relativeHitY = ballCenter - paddleBounds.Y;
+        float hitFactor = (relativeHitY / paddleBounds.Height) * 2f - 1f;
+        hitFactor = MathHelper.Clamp(hitFactor, -1f, 1f);
+
+        float maxVerticalForce = 700f;
+        float newY = hitFactor * maxVerticalForce;
+
+        float currentSpeed = Velocity.Length();
+        float newSpeed = MathF.Min(currentSpeed * 1.05f, 1500f);
+
+        Vector2 newDirection = new Vector2(newX, newY);
+        Velocity = Vector2.Normalize(newDirection) * newSpeed;
+
+        if (esPaletaIzquierda)
+        {
+            Position = new Vector2(paddleBounds.Right + 1, Position.Y);
+        }
+        else
+        {
+            Position = new Vector2(paddleBounds.Left - ballSprite.Width - 1, Position.Y);
+        }
     }
 
     /// <summary>
@@ -44,7 +71,7 @@ internal class Ball
     /// </summary>
     public void VerticalBounce()
     {
-        Velocity = new Vector2(Velocity.X, Velocity.Y * -1);
+        Velocity = new Vector2(Velocity.X, -Velocity.Y);
     }
 
     // POSICION
