@@ -1,6 +1,14 @@
 # Pong
 Este es el primer juego que desarrollo para aprender a crear videojuegos 2D utilizando C# en MonoGame
 
+# Visualización del juego creado
+
+
+https://github.com/user-attachments/assets/c2d411f4-6ee5-4a35-b0d0-1c617195ca27
+
+
+
+
 # Metas
 - [X] Boton de reinicio, contador
 - [X] Modo 2 Jugadores 
@@ -25,3 +33,8 @@ Este es el primer juego que desarrollo para aprender a crear videojuegos 2D util
 - Uso de gameTime.ElapsedGameTime.TotalSeconds para manejar el juego mediante DeltaTime y volverlo independiente de las veces que se actualiza el bucle del Juego (pasar de pixeles por frame a pixeles por segundo)
 - Normalizar Vectores, posiciones relativas entre objetos para asignar donde ocurrio el golpe.
 
+# Assets Usados
+- Musica de fondo de https://pixabay.com/es/music/optimista-game-8-bit-399898/
+- Sonido de rebote de la pelota https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-toonboing-mcu-electronic-nicholas-judy-tdc-488797/
+- Sonido de gol https://pixabay.com/es/sound-effects/pel%C3%ADculas-y-efectos-especiales-8-bit-level-win-584217/
+- Dibujos por mi en Aseprite
