@@ -3,7 +3,10 @@ Este es el primer juego que desarrollo para aprender a crear videojuegos 2D util
 
 # Visualización del juego creado
 
-https://github.com/user-attachments/assets/9a5b5b37-9a71-4a90-87d2-619a5e8c2717
+
+https://github.com/user-attachments/assets/c2d411f4-6ee5-4a35-b0d0-1c617195ca27
+
+
 
 
 # Metas
